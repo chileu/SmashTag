@@ -15,6 +15,7 @@
 		9256A0F61EA5827B008DDD31 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9256A0F51EA5827B008DDD31 /* Twitter.framework */; };
 		9256A0F71EA5827B008DDD31 /* Twitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9256A0F51EA5827B008DDD31 /* Twitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9256A0FE1EA59256008DDD31 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */; };
+		9256A11E1EA6B3A8008DDD31 /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
 		9256A0F51EA5827B008DDD31 /* Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				92296E9A1EA573CA009F79F7 /* Supporting Files */,
 				92296E8C1EA573B6009F79F7 /* Main.storyboard */,
+				9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */,
 				92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */,
 				92296E941EA573B6009F79F7 /* Info.plist */,
 				9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */,
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9256A11E1EA6B3A8008DDD31 /* MentionsTableViewController.swift in Sources */,
 				92296E891EA573B6009F79F7 /* AppDelegate.swift in Sources */,
 				92296E9C1EA5740B009F79F7 /* TweetTableViewController.swift in Sources */,
 				9256A0FE1EA59256008DDD31 /* TweetTableViewCell.swift in Sources */,

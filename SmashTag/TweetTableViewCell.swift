@@ -60,11 +60,13 @@ class TweetTableViewCell: UITableViewCell {
         if let profileImageURL = tweet?.user.profileImageURL {
             
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                if let imageData = try? Data(contentsOf: profileImageURL) {
-                    self?.tweetProfileImageView?.image = UIImage(data: imageData)
+                let loadedImageData = try? Data(contentsOf: profileImageURL)
+                DispatchQueue.main.async {
+                    if let imageData = loadedImageData {
+                        self?.tweetProfileImageView?.image = UIImage(data: imageData)
+                    }
                 }
             }
-            
         } else {
             tweetProfileImageView?.image = nil
         }
