@@ -16,6 +16,7 @@
 		9256A0FE1EA59256008DDD31 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */; };
 		9256A11E1EA6B3A8008DDD31 /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */; };
 		9256A1201EA70A9E008DDD31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9256A11F1EA70A9E008DDD31 /* Main.storyboard */; };
+		9256A1221EA7E60F008DDD31 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		9256A11F1EA70A9E008DDD31 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +83,9 @@
 				92296E9A1EA573CA009F79F7 /* Supporting Files */,
 				9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */,
 				92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */,
-				92296E941EA573B6009F79F7 /* Info.plist */,
 				9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */,
+				9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */,
+				92296E941EA573B6009F79F7 /* Info.plist */,
 			);
 			path = SmashTag;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				9256A11E1EA6B3A8008DDD31 /* MentionsTableViewController.swift in Sources */,
 				92296E891EA573B6009F79F7 /* AppDelegate.swift in Sources */,
+				9256A1221EA7E60F008DDD31 /* ImageTableViewCell.swift in Sources */,
 				92296E9C1EA5740B009F79F7 /* TweetTableViewController.swift in Sources */,
 				9256A0FE1EA59256008DDD31 /* TweetTableViewCell.swift in Sources */,
 			);

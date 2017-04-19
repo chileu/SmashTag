@@ -28,8 +28,8 @@ class MentionsTableViewController: UITableViewController {
             switch self {
             case .Keyword(let keyword):
                 return keyword
-            case .Image(let url, _):
-                return String(describing: url)
+            case .Image(let url, let double):
+                return "\(url), \(double)"
             }
         }
     }
@@ -45,7 +45,6 @@ class MentionsTableViewController: UITableViewController {
                 let data = media.map { MentionType.Image($0.url, $0.aspectRatio) }
                 mentionsArray.append(Mention.init(data: data))
             }
-            
             
             if let hashtags = tweet?.hashtags {
                 let data = hashtags.map { MentionType.Keyword($0.keyword) }
@@ -63,15 +62,15 @@ class MentionsTableViewController: UITableViewController {
             }
             
             print("MENTIONS ARRAY: \(mentionsArray)")
-            //print("MENTIONS ARRAY: \(mentionsArray[1].data[0])")
-            print("--------------------")
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
+        print("bounds width: \(view.bounds.size.width)")
+        print("bounds height: \(view.bounds.size.height)")
+        //tableView.estimatedRowHeight = tableView.rowHeight
+        //tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     // MARK: - Table view data source
@@ -84,17 +83,31 @@ class MentionsTableViewController: UITableViewController {
         return mentionsArray[section].data.count
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let mention = mentionsArray[indexPath.section].data[indexPath.row]
+        switch mention {
+        case .Image(_, let ratio):
+            return view.bounds.size.width / CGFloat(ratio)
+        case .Keyword(_):
+            return UITableViewAutomaticDimension
+        }
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
-        
-        switch indexPath.section {
-        case 1, 2, 3:
-            cell.textLabel?.text = mentionsArray[indexPath.section].data[indexPath.row].description
-        default:
-            break
+        let mention = mentionsArray[indexPath.section].data[indexPath.row]
+        switch mention {
+        case .Image(let url, _):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Image", for: indexPath)
+            
+            if let imageCell = cell as? ImageTableViewCell {
+                imageCell.imageURL = url
+            }
+            return cell
+        case .Keyword(let keyword):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
+            cell.textLabel?.text = keyword
+            return cell
         }
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
