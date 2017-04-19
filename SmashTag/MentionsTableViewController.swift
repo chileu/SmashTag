@@ -111,10 +111,13 @@ class MentionsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 { return "Images" }
-        if section == 1 { return "Hashtags"}
-        if section == 2 { return "User Mentions"}
-        if section == 3 { return "Urls"}
+        let sectionData = mentionsArray[section].data
+        if !sectionData.isEmpty {
+            if section == 0 { return "Images" }
+            if section == 1 { return "Hashtags"}
+            if section == 2 { return "User Mentions"}
+            if section == 3 { return "Urls"}
+        }
         return ""
     }
 
