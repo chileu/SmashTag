@@ -67,10 +67,8 @@ class MentionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("bounds width: \(view.bounds.size.width)")
-        print("bounds height: \(view.bounds.size.height)")
-        //tableView.estimatedRowHeight = tableView.rowHeight
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        //print("bounds width: \(view.bounds.size.width)")
+        //print("bounds height: \(view.bounds.size.height)")
     }
 
     // MARK: - Table view data source
@@ -120,6 +118,15 @@ class MentionsTableViewController: UITableViewController {
         }
         return ""
     }
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, identifier == "SearchKeyword" {
+            if let destinationVC = segue.destination as? TweetTableViewController {
+                destinationVC.searchText = (sender as? UITableViewCell)?.textLabel?.text
+            }
+        }
+     }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -156,14 +163,5 @@ class MentionsTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
