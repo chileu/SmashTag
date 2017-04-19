@@ -11,9 +11,59 @@ import Twitter
 
 class MentionsTableViewController: UITableViewController {
     
+    private lazy var mentionsArray = [Mention]()
+    
+    private struct Mention: CustomStringConvertible {
+        var data: [MentionType]
+        var description: String {
+            return String(describing: data)
+        }
+    }
+    
+    private enum MentionType: CustomStringConvertible {
+        case Image(URL, Double)         // for images(URL, aspectRatio)
+        case Keyword(String)            // for hashtags, userMentions, and urls(keyword)
+        
+        var description: String {
+            switch self {
+            case .Keyword(let keyword):
+                return keyword
+            case .Image(let url, _):
+                return String(describing: url)
+            }
+        }
+    }
+
     var tweet: Twitter.Tweet? {
         didSet {
-            print("mentions vc tweet: \(tweet)")
+            //var mediaArray = [MentionType]()
+            //var hashtagsArray = [(MentionType)]()
+            //var userMentionsArray = [(MentionType)]()
+            //var urlsArray = [(MentionType)]()
+            
+            if let media = tweet?.media {
+                let data = media.map { MentionType.Image($0.url, $0.aspectRatio) }
+                mentionsArray.append(Mention.init(data: data))
+            }
+            
+            
+            if let hashtags = tweet?.hashtags {
+                let data = hashtags.map { MentionType.Keyword($0.keyword) }
+                mentionsArray.append(Mention.init(data: data))
+            }
+            
+            if let userMentions = tweet?.userMentions {
+                let data = userMentions.map { MentionType.Keyword($0.keyword) }
+                mentionsArray.append(Mention.init(data: data))
+            }
+            
+            if let urls = tweet?.urls {
+                let data = urls.map { MentionType.Keyword($0.keyword) }
+                mentionsArray.append(Mention.init(data: data))
+            }
+            
+            print("MENTIONS ARRAY: \(mentionsArray)")
+            print("--------------------")
         }
     }
 
@@ -24,14 +74,14 @@ class MentionsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return mentionsArray.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return mentionsArray[section].data.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
@@ -39,7 +89,7 @@ class MentionsTableViewController: UITableViewController {
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
