@@ -11,11 +11,14 @@ import Twitter
 
 class MentionsTableViewController: UITableViewController {
     
-    var tweet: Twitter.Tweet?
+    var tweet: Twitter.Tweet? {
+        didSet {
+            print("mentions vc tweet: \(tweet)")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     // MARK: - Table view data source
