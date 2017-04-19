@@ -63,12 +63,15 @@ class MentionsTableViewController: UITableViewController {
             }
             
             print("MENTIONS ARRAY: \(mentionsArray)")
+            //print("MENTIONS ARRAY: \(mentionsArray[1].data[0])")
             print("--------------------")
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     // MARK: - Table view data source
@@ -83,13 +86,24 @@ class MentionsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
+        
+        switch indexPath.section {
+        case 1, 2, 3:
+            cell.textLabel?.text = mentionsArray[indexPath.section].data[indexPath.row].description
+        default:
+            break
+        }
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 { return "Images" }
+        if section == 1 { return "Hashtags"}
+        if section == 2 { return "User Mentions"}
+        if section == 3 { return "Urls"}
+        return ""
+    }
 
     /*
     // Override to support conditional editing of the table view.
