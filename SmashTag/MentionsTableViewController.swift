@@ -114,14 +114,22 @@ class MentionsTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let text = (sender as? UITableViewCell)?.textLabel?.text
+        guard let identifier = segue.identifier else { return }
         
-        if let identifier = segue.identifier, identifier == "SearchKeyword" {
-            if let destinationVC = segue.destination as? TweetTableViewController,
-                let text = text {
+            let text = (sender as? UITableViewCell)?.textLabel?.text
+            if identifier == "SearchKeyword" {
+                if let destinationVC = segue.destination as? TweetTableViewController, let text = text {
                     destinationVC.searchText = text
+                }
             }
-        }
+        
+            let url = (sender as? ImageTableViewCell)?.imageURL
+            if identifier == "ShowImage" {
+                if let destinationVC = segue.destination as? ImageViewController, let url = url {
+                    destinationVC.imageURL = url
+                }
+            }
+    
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -146,5 +154,4 @@ class MentionsTableViewController: UITableViewController {
             }
         }
     }
-    
 }
