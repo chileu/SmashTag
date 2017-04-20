@@ -37,11 +37,6 @@ class MentionsTableViewController: UITableViewController {
 
     var tweet: Twitter.Tweet? {
         didSet {
-            //var mediaArray = [MentionType]()
-            //var hashtagsArray = [(MentionType)]()
-            //var userMentionsArray = [(MentionType)]()
-            //var urlsArray = [(MentionType)]()
-            
             if let media = tweet?.media {
                 let data = media.map { MentionType.Image($0.url, $0.aspectRatio) }
                 mentionsArray.append(Mention.init(title: "Images", data: data))
@@ -61,18 +56,8 @@ class MentionsTableViewController: UITableViewController {
                 let data = urls.map { MentionType.Keyword($0.keyword) }
                 mentionsArray.append(Mention.init(title: "Urls", data: data))
             }
-            
-            print("MENTIONS ARRAY: \(mentionsArray)")
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //print("bounds width: \(view.bounds.size.width)")
-        //print("bounds height: \(view.bounds.size.height)")
-    }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return mentionsArray.count
@@ -129,7 +114,6 @@ class MentionsTableViewController: UITableViewController {
                     destinationVC.imageURL = url
                 }
             }
-    
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

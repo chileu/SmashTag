@@ -8,19 +8,37 @@
 
 import UIKit
 
-class ImageViewController: UIViewController, UIScrollViewDelegate {
+class ImageViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.delegate = self
             scrollView.contentSize = imageView.frame.size
-            scrollView.minimumZoomScale = 0.5
-            scrollView.maximumZoomScale = 1.5
+            scrollView.minimumZoomScale = 0.03
+            scrollView.maximumZoomScale = 2.0
             scrollView.addSubview(imageView)
         }
     }
-
-    private var imageView = UIImageView()
+    
+    private var scrollViewDidScrollOrZoom = false
+    
+    private func autoScale() {
+        if scrollViewDidScrollOrZoom {
+            return
+        } else {
+            if let scrollView = scrollView {
+                if image != nil {
+                    scrollView.zoomScale = min(scrollView.bounds.size.height / image!.size.height,
+                                                scrollView.bounds.size.width / image!.size.width)
+                    scrollView.contentOffset = CGPoint(x: (imageView.frame.size.width - scrollView.frame.size.width) / 2,
+                                               y: (imageView.frame.size.height - scrollView.frame.size.height) / 2)
+                    scrollViewDidScrollOrZoom = false
+                }
+            }
+        }
+    }
+    
+    fileprivate var imageView = UIImageView()
     
     private var image: UIImage? {
         get {
@@ -28,8 +46,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
         set {
             imageView.image = newValue
-            imageView.sizeToFit()
+            imageView.sizeToFit()  // resizes the imageView (receiver) to fit whatever image (or subview) is inside of it
             scrollView?.contentSize = imageView.frame.size
+            scrollViewDidScrollOrZoom = false
+            autoScale()
         }
     }
 
@@ -63,5 +83,24 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             fetchImage()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        autoScale()
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollViewDidScrollOrZoom = true
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollViewDidScrollOrZoom = true
+    }
 
+}
+
+extension ImageViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }
