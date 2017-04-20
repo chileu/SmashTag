@@ -87,13 +87,9 @@
 			children = (
 				9256A11F1EA70A9E008DDD31 /* Main.storyboard */,
 				92296E9A1EA573CA009F79F7 /* Supporting Files */,
-				9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */,
-				92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */,
-				9256A1231EA8EBA5008DDD31 /* ImageViewController.swift */,
-				9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */,
-				9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */,
-				9256A1251EA95905008DDD31 /* RecentSearches.swift */,
-				9256A1271EA95E35008DDD31 /* RecentSearchesTableViewController.swift */,
+				9256A12A1EA971C9008DDD31 /* Model */,
+				9256A12B1EA971D8008DDD31 /* View */,
+				9256A1291EA971BC008DDD31 /* Controller */,
 				92296E941EA573B6009F79F7 /* Info.plist */,
 			);
 			path = SmashTag;
@@ -107,6 +103,34 @@
 				92296E911EA573B6009F79F7 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9256A1291EA971BC008DDD31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */,
+				92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */,
+				9256A1231EA8EBA5008DDD31 /* ImageViewController.swift */,
+				9256A1271EA95E35008DDD31 /* RecentSearchesTableViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9256A12A1EA971C9008DDD31 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9256A1251EA95905008DDD31 /* RecentSearches.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9256A12B1EA971D8008DDD31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */,
+				9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

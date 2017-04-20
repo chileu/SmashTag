@@ -30,5 +30,11 @@ struct RecentSearches {
         defaults.set(newArray, forKey: Constants.key)
     }
     
+    static func delete(at index: Int) {
+        var currentSearches = defaults.object(forKey: Constants.key) as? [String] ?? []
+        currentSearches.remove(at: index)
+        defaults.set(currentSearches, forKey: Constants.key)
+    }
+    
     
 }
