@@ -102,7 +102,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdk-1I-GkT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2268" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2380" y="139"/>
         </scene>
         <!--Mentions-->
         <scene sceneID="M0i-oI-sj8">
@@ -173,7 +173,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upU-HS-k84" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3119.1999999999998" y="138.98050974512745"/>
+            <point key="canvasLocation" x="3284" y="161"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="1At-yf-7LB">
@@ -188,7 +188,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="niE-Fv-0i5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -205,24 +205,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUF-0i-tqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3984.8000000000002" y="138.98050974512745"/>
+            <point key="canvasLocation" x="4074" y="161"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Recent Searches-->
         <scene sceneID="yN4-cZ-7p5">
             <objects>
-                <tableViewController id="h4Q-AX-LnW" sceneMemberID="viewController">
+                <tableViewController id="h4Q-AX-LnW" customClass="RecentSearchesTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="okP-Sk-XTf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Recents" id="WLC-4C-a9o">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentSearches" textLabel="5dy-Lw-qSn" style="IBUITableViewCellStyleDefault" id="WLC-4C-a9o">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WLC-4C-a9o" id="5BU-fy-aDs">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5dy-Lw-qSn">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nas-df-2CN" kind="show" identifier="ShowRecentSearches" id="vDg-JX-sXg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -230,11 +242,11 @@
                             <outlet property="delegate" destination="h4Q-AX-LnW" id="0Ei-DV-G0g"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="Ykl-uB-ixu"/>
+                    <navigationItem key="navigationItem" title="Recent Searches" id="bfx-Z4-JQs"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42T-aj-7wI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1414" y="854"/>
+            <point key="canvasLocation" x="2322" y="853"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZxW-Mp-Xt3">
@@ -266,15 +278,34 @@
                     </tabBar>
                     <connections>
                         <segue destination="ucq-K0-G5I" kind="relationship" relationship="viewControllers" id="b8w-kL-EWS"/>
-                        <segue destination="h4Q-AX-LnW" kind="relationship" relationship="viewControllers" id="ub6-4s-j4b"/>
+                        <segue destination="7TK-dr-5Kj" kind="relationship" relationship="viewControllers" id="ub6-4s-j4b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X72-zG-rt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="378" y="534"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YfQ-gt-ZSE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7TK-dr-5Kj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="Ykl-uB-ixu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wnE-zI-6SI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h4Q-AX-LnW" kind="relationship" relationship="rootViewController" id="rpi-nH-e3h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nb3-pe-vK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413.5999999999999" y="853.22338830584715"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gOq-dy-z8m"/>
+        <segue reference="w6A-TN-bNQ"/>
     </inferredMetricsTieBreakers>
 </document>

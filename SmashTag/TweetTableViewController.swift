@@ -116,8 +116,17 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
 extension UIViewController {
     var contentViewController: UIViewController {
-        if let navcon = self as? UINavigationController {
-            return navcon.visibleViewController ?? self
+        if let tabBarController = self as? UITabBarController {
+            let firstController = tabBarController.viewControllers?[0]
+            if let navController = firstController as? UINavigationController {
+                return navController.visibleViewController ?? self
+            } else {
+                return self
+            }
+        }
+        
+        if let navController = self as? UINavigationController {
+            return navController.visibleViewController ?? self
         } else {
             return self
         }
