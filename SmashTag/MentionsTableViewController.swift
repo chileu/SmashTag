@@ -113,11 +113,38 @@ class MentionsTableViewController: UITableViewController {
         return mentionsArray[section].data.isEmpty ? "" : mentionsArray[section].title
     }
     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let text = (sender as? UITableViewCell)?.textLabel?.text
+        
         if let identifier = segue.identifier, identifier == "SearchKeyword" {
-            if let destinationVC = segue.destination as? TweetTableViewController {
-                destinationVC.searchText = (sender as? UITableViewCell)?.textLabel?.text
+            if let destinationVC = segue.destination as? TweetTableViewController,
+                let text = text {
+                    destinationVC.searchText = text
             }
         }
-     }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let text = (sender as? UITableViewCell)?.textLabel?.text
+        if let text = text, identifier == "SearchKeyword", text.hasPrefix("http") {
+            open(text)
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func open(_ text: String) {
+        if let url = URL(string: text) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: { success in
+                    print("Open \(text) \(success)")
+                })
+            } else {
+                let success = UIApplication.shared.openURL(url)
+                print("Open \(text) \(success)")
+            }
+        }
+    }
+    
 }
