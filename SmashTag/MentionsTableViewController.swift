@@ -14,6 +14,7 @@ class MentionsTableViewController: UITableViewController {
     private lazy var mentionsArray = [Mention]()
     
     private struct Mention: CustomStringConvertible {
+        var title: String
         var data: [MentionType]
         var description: String {
             return String(describing: data)
@@ -43,22 +44,22 @@ class MentionsTableViewController: UITableViewController {
             
             if let media = tweet?.media {
                 let data = media.map { MentionType.Image($0.url, $0.aspectRatio) }
-                mentionsArray.append(Mention.init(data: data))
+                mentionsArray.append(Mention.init(title: "Images", data: data))
             }
             
             if let hashtags = tweet?.hashtags {
                 let data = hashtags.map { MentionType.Keyword($0.keyword) }
-                mentionsArray.append(Mention.init(data: data))
+                mentionsArray.append(Mention.init(title: "Hashtags", data: data))
             }
             
             if let userMentions = tweet?.userMentions {
                 let data = userMentions.map { MentionType.Keyword($0.keyword) }
-                mentionsArray.append(Mention.init(data: data))
+                mentionsArray.append(Mention.init(title: "User Mentions", data: data))
             }
             
             if let urls = tweet?.urls {
                 let data = urls.map { MentionType.Keyword($0.keyword) }
-                mentionsArray.append(Mention.init(data: data))
+                mentionsArray.append(Mention.init(title: "Urls", data: data))
             }
             
             print("MENTIONS ARRAY: \(mentionsArray)")
@@ -109,14 +110,7 @@ class MentionsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionData = mentionsArray[section].data
-        if !sectionData.isEmpty {
-            if section == 0 { return "Images" }
-            if section == 1 { return "Hashtags"}
-            if section == 2 { return "User Mentions"}
-            if section == 3 { return "Urls"}
-        }
-        return ""
+        return mentionsArray[section].data.isEmpty ? "" : mentionsArray[section].title
     }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
