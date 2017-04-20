@@ -28,7 +28,6 @@ struct RecentSearches {
             newArray.removeLast()
         }
         defaults.set(newArray, forKey: Constants.key)
-        print("newArray: \(newArray)")
     }
     
     

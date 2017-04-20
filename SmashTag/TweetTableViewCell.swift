@@ -27,6 +27,35 @@ class TweetTableViewCell: UITableViewCell {
         tweetTextLabel?.text = tweet?.text
         tweetUserLabel?.text = tweet?.user.description
         
+        performColorUpdateOnTweetString()
+        
+        if let profileImageURL = tweet?.user.profileImageURL {
+            
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let loadedImageData = try? Data(contentsOf: profileImageURL)
+                DispatchQueue.main.async {
+                    if let imageData = loadedImageData {
+                        self?.tweetProfileImageView?.image = UIImage(data: imageData)
+                    }
+                }
+            }
+        } else {
+            tweetProfileImageView?.image = nil
+        }
+        if let created = tweet?.created {
+            let formatter = DateFormatter()
+            if Date().timeIntervalSince(created) > 24*60*60 {
+                formatter.dateStyle = .short
+            } else {
+                formatter.timeStyle = .short
+            }
+            tweetCreatedLabel?.text = formatter.string(from: created)
+        } else {
+            tweetCreatedLabel?.text = nil
+        }
+    }
+    
+    private func performColorUpdateOnTweetString() {
         if let tweetText = tweet?.text {
             let mutableTweetText = NSMutableAttributedString(string: tweetText, attributes: nil)
             
@@ -53,33 +82,8 @@ class TweetTableViewCell: UITableViewCell {
             for userMention in userMentions {
                 mutableTweetText.addAttributes([NSForegroundColorAttributeName: UIColor.orange], range: NSRange(location: userMention.nsrange.location, length: userMention.keyword.characters.count))
             }
-    
-            tweetTextLabel?.attributedText = mutableTweetText
-        }
-        
-        if let profileImageURL = tweet?.user.profileImageURL {
             
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let loadedImageData = try? Data(contentsOf: profileImageURL)
-                DispatchQueue.main.async {
-                    if let imageData = loadedImageData {
-                        self?.tweetProfileImageView?.image = UIImage(data: imageData)
-                    }
-                }
-            }
-        } else {
-            tweetProfileImageView?.image = nil
-        }
-        if let created = tweet?.created {
-            let formatter = DateFormatter()
-            if Date().timeIntervalSince(created) > 24*60*60 {
-                formatter.dateStyle = .short
-            } else {
-                formatter.timeStyle = .short
-            }
-            tweetCreatedLabel?.text = formatter.string(from: created)
-        } else {
-            tweetCreatedLabel?.text = nil
+            tweetTextLabel?.attributedText = mutableTweetText
         }
     }
 }
