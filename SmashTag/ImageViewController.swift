@@ -30,8 +30,18 @@ class ImageViewController: UIViewController {
                 if image != nil {
                     scrollView.zoomScale = min(scrollView.bounds.size.height / image!.size.height,
                                                 scrollView.bounds.size.width / image!.size.width)
+//                    print("zoom scale: \(scrollView.zoomScale)")
+                    
                     scrollView.contentOffset = CGPoint(x: (imageView.frame.size.width - scrollView.frame.size.width) / 2,
                                                y: (imageView.frame.size.height - scrollView.frame.size.height) / 2)
+                    
+//                    print("imageView.frame.size.width: \(imageView.frame.size.width)")
+//                    print("imageView.frame.size.height: \(imageView.frame.size.height)")
+//                    print("scrollView.frame.size.width: \(scrollView.frame.size.width)")
+//                    print("scrollView.frame.size.height: \(scrollView.frame.size.height)")
+//                    print("scrollView.contentOffset: \(scrollView.contentOffset)")
+//                    print("----------")
+                    
                     scrollViewDidScrollOrZoom = false
                 }
             }
@@ -48,6 +58,13 @@ class ImageViewController: UIViewController {
             imageView.image = newValue
             imageView.sizeToFit()  // resizes the imageView (receiver) to fit whatever image (or subview) is inside of it
             scrollView?.contentSize = imageView.frame.size
+            
+//            print("before scrollView?.contentSize: \(scrollView?.contentSize)")
+//            print("before imageView.frame.size.width: \(imageView.frame.size.width)")
+//            print("before imageView.frame.size.height: \(imageView.frame.size.height)")
+//            print("before scrollView.frame.size.width: \(scrollView?.frame.size.width)")
+//            print("before scrollView.frame.size.height: \(scrollView?.frame.size.height)")
+            
             scrollViewDidScrollOrZoom = false
             autoScale()
         }

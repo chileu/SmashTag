@@ -32,12 +32,15 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     var searchText: String? {
         didSet {
+            guard let text = searchText else {
+                return
+            }
             searchTextField?.text = searchText
             searchTextField?.resignFirstResponder()
             tweets.removeAll()
             tableView.reloadData()
             searchForTweets()
-            title = searchText
+            RecentSearches.add(text)
         }
     }
     
