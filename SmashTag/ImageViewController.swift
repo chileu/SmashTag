@@ -30,6 +30,10 @@ class ImageViewController: UIViewController {
                 if image != nil {
                     scrollView.zoomScale = min(scrollView.bounds.size.height / image!.size.height,
                                                 scrollView.bounds.size.width / image!.size.width)
+//                    print("(2)scrollView.bounds.size.width: \(scrollView.bounds.size.width)")
+//                    print("(2)scrollView.bounds.size.height: \(scrollView.bounds.size.height)")
+//                    print("(2)image!.size.height \(image!.size.height)")
+//                    print("(2)image!.size.width \(image!.size.width)")
 //                    print("zoom scale: \(scrollView.zoomScale)")
                     
                     scrollView.contentOffset = CGPoint(x: (imageView.frame.size.width - scrollView.frame.size.width) / 2,
@@ -60,10 +64,10 @@ class ImageViewController: UIViewController {
             scrollView?.contentSize = imageView.frame.size
             
 //            print("before scrollView?.contentSize: \(scrollView?.contentSize)")
-//            print("before imageView.frame.size.width: \(imageView.frame.size.width)")
-//            print("before imageView.frame.size.height: \(imageView.frame.size.height)")
-//            print("before scrollView.frame.size.width: \(scrollView?.frame.size.width)")
-//            print("before scrollView.frame.size.height: \(scrollView?.frame.size.height)")
+//            print("(1)imageView.frame.size.width: \(imageView.frame.size.width)")
+//            print("(1)imageView.frame.size.height: \(imageView.frame.size.height)")
+//            print("(1)scrollView.frame.size.width: \(scrollView?.frame.size.width)")
+//            print("(1)scrollView.frame.size.height: \(scrollView?.frame.size.height)")
             
             scrollViewDidScrollOrZoom = false
             autoScale()

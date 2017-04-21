@@ -35,6 +35,4 @@ struct RecentSearches {
         currentSearches.remove(at: index)
         defaults.set(currentSearches, forKey: Constants.key)
     }
-    
-    
 }

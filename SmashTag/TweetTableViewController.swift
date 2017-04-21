@@ -11,6 +11,10 @@ import Twitter
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
+    override func awakeFromNib() {
+        searchText = RecentSearches.searches.first
+    }
+    
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
@@ -71,10 +75,15 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        //searchText = "#stanford"
+        
+        let imageButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showImages))
+        navigationItem.rightBarButtonItem = imageButton
     }
     
-    // MARK: - Table view data source
+    func showImages() {
+        performSegue(withIdentifier: "ShowTweetImages", sender: navigationItem.rightBarButtonItem)
+    }
+    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tweets.count
@@ -111,6 +120,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         if let destinationVC = destinationVC.contentViewController as? MentionsTableViewController, let identifier = segue.identifier, identifier == "ShowMentions" {
             destinationVC.tweet = sender as? Twitter.Tweet
         }
+        if let destinationVC = destinationVC.contentViewController as? ImagesCollectionViewController, let identifier = segue.identifier, identifier == "ShowTweetImages" {
+            destinationVC.tweets = tweets
+        }
+        
     }
 }
 
