@@ -21,6 +21,7 @@
 		9256A1261EA95905008DDD31 /* RecentSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A1251EA95905008DDD31 /* RecentSearches.swift */; };
 		9256A1281EA95E35008DDD31 /* RecentSearchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256A1271EA95E35008DDD31 /* RecentSearchesTableViewController.swift */; };
 		926BA9961EAA589000502FC4 /* ImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BA9951EAA589000502FC4 /* ImagesCollectionViewController.swift */; };
+		926BA9981EAA8ABC00502FC4 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BA9971EAA8ABC00502FC4 /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		9256A1251EA95905008DDD31 /* RecentSearches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearches.swift; sourceTree = "<group>"; };
 		9256A1271EA95E35008DDD31 /* RecentSearchesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearchesTableViewController.swift; sourceTree = "<group>"; };
 		926BA9951EAA589000502FC4 /* ImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewController.swift; sourceTree = "<group>"; };
+		926BA9971EAA8ABC00502FC4 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				9256A1211EA7E60F008DDD31 /* ImageTableViewCell.swift */,
 				9256A0FD1EA59256008DDD31 /* TweetTableViewCell.swift */,
+				926BA9971EAA8ABC00502FC4 /* ImageCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				92296E891EA573B6009F79F7 /* AppDelegate.swift in Sources */,
 				9256A1221EA7E60F008DDD31 /* ImageTableViewCell.swift in Sources */,
 				9256A1261EA95905008DDD31 /* RecentSearches.swift in Sources */,
+				926BA9981EAA8ABC00502FC4 /* ImageCollectionViewCell.swift in Sources */,
 				92296E9C1EA5740B009F79F7 /* TweetTableViewController.swift in Sources */,
 				9256A1241EA8EBA5008DDD31 /* ImageViewController.swift in Sources */,
 				9256A0FE1EA59256008DDD31 /* TweetTableViewCell.swift in Sources */,

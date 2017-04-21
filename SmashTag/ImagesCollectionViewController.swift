@@ -9,58 +9,50 @@
 import UIKit
 import Twitter
 
-private let reuseIdentifier = "Cell"
-
 class ImagesCollectionViewController: UICollectionViewController {
     
+    @IBOutlet weak var tweetImage: UIImageView!
     lazy var tweets = [Array<Twitter.Tweet>]()
+    
+    struct TweetMedia: CustomStringConvertible {
+        var url: URL
+        var aspectRatio: Double
+        var description: String {
+            return "\(url) -" + " \(aspectRatio)"
+        }
+    }
+    
+    private lazy var tweetImages =  [[TweetMedia]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("tweets: \(tweets)")
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+        //print("tweets flatmap: \(tweets.flatMap { $0 }.filter { !$0.media.isEmpty } )")
+        
+        let tweetData = tweets.flatMap { $0 }
+            .filter { !$0.media.isEmpty }
+            .map { $0.media.map { TweetMedia.init(url: $0.url, aspectRatio: $0.aspectRatio) } }
+            .flatMap { $0 }
+        tweetImages.append(tweetData)
+        
+        //print("tweet images: \(tweetImages)")
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return tweetImages.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return tweetImages[section].count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TweetImageCell", for: indexPath)
+        if let cell = cell as? ImageCollectionViewCell {
+            cell.imageURL = tweetImages[indexPath.section][indexPath.item].url
+        }
         return cell
     }
 
@@ -94,5 +86,16 @@ class ImagesCollectionViewController: UICollectionViewController {
     
     }
     */
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using [segue destinationViewController].
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }
