@@ -43,6 +43,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             searchTextField?.resignFirstResponder()
             tweets.removeAll()
             tableView.reloadData()
+            lastTwitterRequest = nil
             searchForTweets()
             RecentSearches.add(text)
         }

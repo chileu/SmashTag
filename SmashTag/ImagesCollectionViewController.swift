@@ -55,8 +55,6 @@ class ImagesCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    
-
     // MARK: UICollectionViewDelegate
 
     /*
