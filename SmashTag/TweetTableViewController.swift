@@ -30,7 +30,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     private var tweets = [Array<Twitter.Tweet>]() {
         didSet {
-            //print("tweets count: \(tweets.flatMap {$0.count}) ")
+            //print("tweets \(tweets)")
         }
     }
 
@@ -52,7 +52,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     private func twitterRequest() -> Twitter.Request? {
         if lastTwitterRequest == nil {
             if let query = searchText, !query.isEmpty {
-                return Twitter.Request(search: query, count: 100)
+                return Twitter.Request(search: "\(query) -filter:safe -filter:retweets", count: 100)
             }
         }
         return lastTwitterRequest?.newer
@@ -69,6 +69,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                         self?.tweets.insert(newTweets, at: 0)
                         self?.tableView.insertSections([0], with: .fade)
                     }
+                    
                 }
                 
             }
@@ -119,6 +120,37 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+    
+//    private lazy var pendingRequestForOlderTweets = false
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if let visibleIndexPaths = tableView.indexPathsForVisibleRows {
+//            //print("index paths for visible rows: \(visibleIndexPaths)")
+//            var totalNumberOfTweets = 0
+//            for indexPathPair in visibleIndexPaths {
+//                //print("max: \(max(indexPathPair[0], indexPathPair[1]))")
+//                let maxIndex = max(indexPathPair[0], indexPathPair[1])
+//                totalNumberOfTweets = tweets.flatMap {$0.count}.reduce(0, +)
+//                
+//                print("max index: \(maxIndex), totalNumberOfTweet: \(totalNumberOfTweets)")
+//                
+//                if let request = lastTwitterRequest { print("request: \(request)") }
+//                
+//                if maxIndex + 1 >= totalNumberOfTweets {
+//                    pendingRequestForOlderTweets = true
+//                    searchForTweets()
+//                    tableView.reloadData()
+//                    pendingRequestForOlderTweets = false
+//                }
+//            }
+//            
+//        }
+//        //print("total # of tweets: \(tweets.flatMap {$0.count}.reduce(0, +))")
+//    }
     
     private var selectedTweet: Twitter.Tweet?
     
