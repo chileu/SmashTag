@@ -35,6 +35,8 @@ class ImagesCollectionViewController: UICollectionViewController {
             .flatMap { $0 }
         tweetImages.append(tweetData)
         
+        setLayout()
+        
         //print("tweet images: \(tweetImages)")
     }
 
@@ -53,6 +55,15 @@ class ImagesCollectionViewController: UICollectionViewController {
             cell.imageURL = tweetImages[indexPath.section][indexPath.item].url
         }
         return cell
+    }
+    
+    func setLayout() {
+        let layoutFlow = UICollectionViewFlowLayout()
+        layoutFlow.minimumLineSpacing = 5
+        layoutFlow.minimumInteritemSpacing = 5
+        layoutFlow.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layoutFlow.itemSize = CGSize(width: 100, height: 100)
+        collectionView?.collectionViewLayout = layoutFlow
     }
     
     // MARK: UICollectionViewDelegate
