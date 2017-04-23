@@ -30,7 +30,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     private var tweets = [Array<Twitter.Tweet>]() {
         didSet {
-            //print(tweets)
+            //print("tweets count: \(tweets.flatMap {$0.count}) ")
         }
     }
 
@@ -49,10 +49,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     private func twitterRequest() -> Twitter.Request? {
-        if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query, count: 100)
+        if lastTwitterRequest == nil {
+            if let query = searchText, !query.isEmpty {
+                return Twitter.Request(search: query, count: 100)
+            }
         }
-        return nil
+        return lastTwitterRequest?.newer
     }
     
     private var lastTwitterRequest: Twitter.Request?
@@ -67,6 +69,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                         self?.tableView.insertSections([0], with: .fade)
                     }
                 }
+                
             }
         }
     }
@@ -78,9 +81,17 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         
         let imageButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showImages))
         navigationItem.rightBarButtonItem = imageButton
+        
+        self.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
     }
     
-    func showImages() {
+    @objc private func handleRefresh(_ refreshControl: UIRefreshControl) {
+        searchForTweets()
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
+    @objc private func showImages() {
         performSegue(withIdentifier: "ShowTweetImages", sender: navigationItem.rightBarButtonItem)
     }
     

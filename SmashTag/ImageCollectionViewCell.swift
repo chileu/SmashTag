@@ -11,6 +11,7 @@ import UIKit
 class ImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tweetImageView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var imageURL: URL? {
         didSet {
@@ -20,11 +21,13 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     private func updateUI() {
         if let url = imageURL {
+            spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let loadedImageData = try? Data(contentsOf: url)
                 if let imageData = loadedImageData {
                     DispatchQueue.main.async {
                         self?.tweetImageView.image = UIImage(data: imageData)
+                        self?.spinner.stopAnimating()
                     }
                 }
             }

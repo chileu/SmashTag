@@ -36,7 +36,6 @@ class ImagesCollectionViewController: UICollectionViewController {
         tweetImages.append(tweetData)
         
         //print("tweet images: \(tweetImages)")
-        
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -55,6 +54,8 @@ class ImagesCollectionViewController: UICollectionViewController {
         }
         return cell
     }
+    
+    
 
     // MARK: UICollectionViewDelegate
 
