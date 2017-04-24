@@ -57,14 +57,34 @@ class ImagesCollectionViewController: UICollectionViewController {
         return cell
     }
     
+    private struct FlowLayout {
+        
+        static let columnCount: CGFloat = 3
+        
+        static let minimumColumnSpacing: CGFloat = 5
+        static let minimumItemSpacing: CGFloat = 5
+        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+    
+    var predefinedWidth: CGFloat {
+        return ((collectionView?.bounds.width)!
+            - FlowLayout.minimumColumnSpacing * (FlowLayout.columnCount - 1)
+            - FlowLayout.sectionInset.right * 2) / FlowLayout.columnCount
+    }
+    
+    var sizePredefined: CGSize {
+        return CGSize(width: predefinedWidth, height: predefinedWidth)
+    }
+    
     func setLayout() {
         let layoutFlow = UICollectionViewFlowLayout()
-        layoutFlow.minimumLineSpacing = 5
-        layoutFlow.minimumInteritemSpacing = 5
-        layoutFlow.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        layoutFlow.itemSize = CGSize(width: 100, height: 100)
+        layoutFlow.minimumLineSpacing = FlowLayout.minimumColumnSpacing
+        layoutFlow.minimumInteritemSpacing = FlowLayout.minimumItemSpacing
+        layoutFlow.sectionInset = FlowLayout.sectionInset
+        layoutFlow.itemSize = sizePredefined
         collectionView?.collectionViewLayout = layoutFlow
     }
+    
     
     // MARK: UICollectionViewDelegate
 
