@@ -16,6 +16,7 @@ class MentionsTableViewController: UITableViewController {
     private struct Mention: CustomStringConvertible {
         var title: String
         var data: [MentionType]
+        
         var description: String {
             return String(describing: data)
         }

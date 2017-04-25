@@ -22,7 +22,12 @@ class RecentSearchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearches", for: indexPath)
         cell.textLabel?.text = RecentSearches.searches[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.detailDisclosureButton
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        //print("index path: \(indexPath.row)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

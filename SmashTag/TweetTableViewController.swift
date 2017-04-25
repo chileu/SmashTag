@@ -49,6 +49,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    // can not be private, otherwise subclass 'SmashTweetTVC' can not override
+    func insertTweets(_ newTweets: [Twitter.Tweet]) {
+        self.tweets.insert(newTweets, at: 0)
+        self.tableView.insertSections([0], with: .fade)
+    }
+    
     private func twitterRequest() -> Twitter.Request? {
         if lastTwitterRequest == nil {
             if let query = searchText, !query.isEmpty {
@@ -66,8 +72,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             request.fetchTweets { [weak self] newTweets in
                 DispatchQueue.main.async {
                     if request == self?.lastTwitterRequest {
-                        self?.tweets.insert(newTweets, at: 0)
-                        self?.tableView.insertSections([0], with: .fade)
+                        self?.insertTweets(newTweets)
                     }
                     
                 }
@@ -82,8 +87,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         let imageButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showImages))
-        navigationItem.rightBarButtonItem = imageButton
-       
+        let tweetersButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showTweeters))
+        navigationItem.rightBarButtonItems = [tweetersButton, imageButton]
+        
         self.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
     }
     
@@ -94,7 +100,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @objc private func showImages() {
-        performSegue(withIdentifier: "ShowTweetImages", sender: navigationItem.rightBarButtonItem)
+        performSegue(withIdentifier: "ShowTweetImages", sender: navigationItem.rightBarButtonItems?[1])
+    }
+    
+    @objc private func showTweeters() {
+        performSegue(withIdentifier: "Tweeters Mentioning Search Term", sender: navigationItem.rightBarButtonItems?[0])
     }
     
 
@@ -110,7 +120,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Tweet", for: indexPath)
         
-        let tweet = tweets[indexPath.section][indexPath.row]
+        let tweet: Twitter.Tweet = tweets[indexPath.section][indexPath.row]
 //        cell.textLabel?.text = tweet.text
 //        cell.detailTextLabel?.text = tweet.user.name
         
@@ -160,10 +170,13 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let destinationVC = segue.destination
+        
         if let destinationVC = destinationVC.contentViewController as? MentionsTableViewController, let identifier = segue.identifier, identifier == "ShowMentions" {
             destinationVC.tweet = sender as? Twitter.Tweet
         }
+        
         if let destinationVC = destinationVC.contentViewController as? ImagesCollectionViewController, let identifier = segue.identifier, identifier == "ShowTweetImages" {
             destinationVC.tweets = tweets
         }
