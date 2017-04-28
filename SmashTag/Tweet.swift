@@ -21,7 +21,7 @@ class Tweet: NSManagedObject {
             let matches = try context.fetch(request)
             if matches.count > 0  {
                 assert(matches.count == 1, "Tweet.findOrCreateTweet -- database inconsistency")
-                return addMentions(keyword: "", tweet: matches[0], twitterInfo: twitterInfo, in: context)
+                return matches[0]
             }
         } catch {           // will catch if there is a database error and we can't fetch
             throw error     // rethrow the error

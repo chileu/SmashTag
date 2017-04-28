@@ -17,6 +17,10 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
     { didSet { updateUI() } }
     
     var fetchedResultsController: NSFetchedResultsController<Mention>?
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     private func updateUI() {
         if let context = container?.viewContext, mention != nil {
