@@ -67,6 +67,16 @@ class SmashTweetTableViewController: TweetTableViewController {
                 tweetersTVC.container = container
             }
         }
+        
+        let destinationVC = segue.destination
+        
+        if let destinationVC = destinationVC.contentViewController as? MentionsTableViewController, let identifier = segue.identifier, identifier == "ShowMentions" {
+            destinationVC.tweet = sender as? Twitter.Tweet
+        }
+        
+        if let destinationVC = destinationVC.contentViewController as? ImagesCollectionViewController, let identifier = segue.identifier, identifier == "ShowTweetImages" {
+            destinationVC.tweets = tweets
+        }
     }
     
 }

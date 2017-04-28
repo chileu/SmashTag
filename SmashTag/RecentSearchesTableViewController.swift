@@ -26,10 +26,6 @@ class RecentSearchesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        //print("index path: \(indexPath.row)")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -42,14 +38,25 @@ class RecentSearchesTableViewController: UITableViewController {
         }
     }
 
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination.contentViewController
-        if let identifier = segue.identifier,
-            identifier == "ShowRecentSearches",
+        if let identifier = segue.identifier {
+            
+            if identifier == "ShowRecentSearches",
             let destinationVC = destinationVC as? TweetTableViewController {
-            if let text = (sender as? UITableViewCell)?.textLabel?.text {
-                destinationVC.searchText = text
-                RecentSearches.add(text)
+                if let text = (sender as? UITableViewCell)?.textLabel?.text {
+                    destinationVC.searchText = text
+                    RecentSearches.add(text)
+                }
+            }
+            
+            if identifier == "ShowPopularMentions",
+                let destinationVC = destinationVC as? PopularMentionsTableViewController {
+                if let text = (sender as? UITableViewCell)?.textLabel?.text {
+                    destinationVC.mention = text
+                    
+                }
             }
         }
     }

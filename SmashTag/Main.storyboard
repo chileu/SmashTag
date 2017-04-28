@@ -294,6 +294,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="nas-df-2CN" kind="show" identifier="ShowRecentSearches" id="vDg-JX-sXg"/>
+                                    <segue destination="cR1-BA-bco" kind="show" identifier="ShowPopularMentions" trigger="accessoryAction" id="vgP-hF-2Sz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -351,6 +352,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ch5-tv-9lV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3374" y="946"/>
+        </scene>
+        <!--Popular Mentions Table View Controller-->
+        <scene sceneID="0hC-NR-UUW">
+            <objects>
+                <tableViewController id="cR1-BA-bco" customClass="PopularMentionsTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aX7-TI-mYY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Popular Mentions Cell" id="xv6-71-NPl">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xv6-71-NPl" id="F1H-wj-8La">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cR1-BA-bco" id="w7i-QU-pq2"/>
+                            <outlet property="delegate" destination="cR1-BA-bco" id="ugM-8q-PYD"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2lD-SR-xKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2883" y="1606"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZxW-Mp-Xt3">

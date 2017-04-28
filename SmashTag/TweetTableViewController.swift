@@ -28,9 +28,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    private var tweets = [Array<Twitter.Tweet>]() {
+    var tweets = [Array<Twitter.Tweet>]() {
         didSet {
-            //print("tweets \(tweets)")
         }
     }
 
@@ -169,19 +168,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "ShowMentions", sender: selectedTweet)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let destinationVC = segue.destination
-        
-        if let destinationVC = destinationVC.contentViewController as? MentionsTableViewController, let identifier = segue.identifier, identifier == "ShowMentions" {
-            destinationVC.tweet = sender as? Twitter.Tweet
-        }
-        
-        if let destinationVC = destinationVC.contentViewController as? ImagesCollectionViewController, let identifier = segue.identifier, identifier == "ShowTweetImages" {
-            destinationVC.tweets = tweets
-        }
-        
-    }
 }
 
 extension UIViewController {

@@ -16,7 +16,7 @@ class Tweet: NSManagedObject {
         let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
         request.predicate = NSPredicate(format: "unique = %@", twitterInfo.identifier)
         
-        // see if the tweet matches anything in the database
+        // see if the tweet matches anything in the database, if it does, just return it and don't create a new one
         do {
             let matches = try context.fetch(request)
             if matches.count > 0  {
