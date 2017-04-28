@@ -15,8 +15,6 @@ class PopularMentionsTableViewController: UITableViewController {
     
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

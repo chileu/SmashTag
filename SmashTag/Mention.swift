@@ -12,27 +12,29 @@ import CoreData
 
 class Mention: NSManagedObject {
     
-    // twitterInfo = array of Mention that came out of this tweet
-    class func findOrCreateMentions(matching twitterInfo: Twitter.Tweet, in context: NSManagedObjectContext) throws -> Mention {
+    class func findOrCreateMentions(query: String, mentionInfo: Twitter.Mention, in context: NSManagedObjectContext) throws -> Mention {
         
-        let request: NSFetchRequest<Mention> = Mention.fetchRequest()
         //should find all mentions where the keyword of the mention matches the search text from the query
         // is this right? or we need to find all mentions that are mentioned in this tweet?
-        request.predicate = NSPredicate(format: "keyword = %@", twitterInfo.hashtags)
         
-        // see if the mention matches anything in the database, if it does, find out it's count (i.e. times appeared) and increment it. otherwise, create a new mention
+        let request: NSFetchRequest<Mention> = Mention.fetchRequest()
+        request.predicate = NSPredicate(format: "keyword = %@ AND query = %@", mentionInfo.keyword, query)
+        
         do {
             let matches = try context.fetch(request)
-
+            if matches.count > 0 {
+                matches[0].count += 1
+                return matches[0]
+            }
+            
         } catch {           // will catch if there is a database error and we can't fetch
             throw error     // rethrow the error
         }
         
-        // create a new mention
         let mention = Mention(context: context)
-
-        //mention.keyword = searchText
-        
+        mention.keyword = mentionInfo.keyword.lowercased()
+        mention.query = query
+        mention.count = 1
         return mention
     }
 }

@@ -28,7 +28,9 @@ class SmashTweetTableViewController: TweetTableViewController {
         // 'context' below refers to new context that was created to perform background task
         container?.performBackgroundTask { [weak self] context in
             for twitterInfo in tweets {
-                _ = try? Tweet.findOrCreateTweet(matching: twitterInfo, in: context)
+                if let searchText = self?.searchText {
+                    _ = try? Tweet.findOrCreateTweet(keyword: searchText, matching: twitterInfo, in: context)
+                }
             }
             try? context.save()
             print("done loading database")
@@ -54,6 +56,10 @@ class SmashTweetTableViewController: TweetTableViewController {
                 
                 if let tweeterCount = try? context.count(for: TwitterUser.fetchRequest()) {
                     print("\(tweeterCount) Twitter Users")
+                }
+                
+                if let mentionsCount = (try? context.fetch(Mention.fetchRequest()))?.count {
+                    print("\(mentionsCount) mentions")
                 }
             }
             
