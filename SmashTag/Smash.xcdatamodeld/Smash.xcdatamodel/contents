@@ -3,18 +3,14 @@
     <entity name="Mention" representedClassName=".Mention" syncable="YES" codeGenerationType="category">
         <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="mentions" inverseEntity="Tweet" syncable="YES"/>
-    </entity>
-    <entity name="Query" representedClassName=".Query" syncable="YES" codeGenerationType="category">
-        <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="queries" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <entity name="Tweet" representedClassName=".Tweet" syncable="YES" codeGenerationType="category">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unique" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="mentions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mention" inverseName="tweets" inverseEntity="Mention" syncable="YES"/>
-        <relationship name="queries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Query" inverseName="tweets" inverseEntity="Query" syncable="YES"/>
         <relationship name="tweeter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterUser" inverseName="tweets" inverseEntity="TwitterUser" syncable="YES"/>
     </entity>
     <entity name="TwitterUser" representedClassName=".TwitterUser" syncable="YES" codeGenerationType="category">
@@ -23,9 +19,8 @@
         <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="tweeter" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Mention" positionX="-513" positionY="-178" width="128" height="88"/>
-        <element name="Tweet" positionX="-137" positionY="-117" width="128" height="133"/>
-        <element name="TwitterUser" positionX="-513" positionY="29" width="128" height="88"/>
-        <element name="Query" positionX="-515" positionY="-72" width="128" height="73"/>
+        <element name="Mention" positionX="-513" positionY="-180" width="128" height="103"/>
+        <element name="Tweet" positionX="-137" positionY="-117" width="128" height="118"/>
+        <element name="TwitterUser" positionX="-513" positionY="-18" width="128" height="88"/>
     </elements>
 </model>
