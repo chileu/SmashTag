@@ -9,30 +9,38 @@
 import UIKit
 import CoreData
 
-class PopularMentionsTableViewController: UITableViewController {
+class PopularMentionsTableViewController: FetchedResultsTableViewController {
     
-    var mention: String?
+    var mention: String? { didSet { updateUI() } } // 'mention' is the text from the row that was selected in Recent Search TVC
     
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+    { didSet { updateUI() } }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var fetchedResultsController: NSFetchedResultsController<Mention>?
+
+    private func updateUI() {
+        if let context = container?.viewContext, mention != nil {
+            let request: NSFetchRequest<Mention> = Mention.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false)]
+            request.predicate = NSPredicate(format: "query = %@", mention!)
+            fetchedResultsController = NSFetchedResultsController<Mention>(
+                fetchRequest: request,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil)
+        }
+        try? fetchedResultsController?.performFetch()
+        tableView.reloadData()
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Popular Mentions Cell", for: indexPath)
+        print("cell found")
+        if let mention = fetchedResultsController?.object(at: indexPath) {
+            print("getting mention: \(mention.keyword)")
+            cell.textLabel?.text = mention.keyword
+            cell.detailTextLabel?.text = String(mention.count)
+        }
         return cell
     }
 

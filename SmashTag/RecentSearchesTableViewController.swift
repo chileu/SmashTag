@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class RecentSearchesTableViewController: UITableViewController {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -55,7 +58,7 @@ class RecentSearchesTableViewController: UITableViewController {
                 let destinationVC = destinationVC as? PopularMentionsTableViewController {
                 if let text = (sender as? UITableViewCell)?.textLabel?.text {
                     destinationVC.mention = text
-                    
+                    destinationVC.container = container
                 }
             }
         }
