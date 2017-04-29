@@ -25,7 +25,6 @@ class RecentSearchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearches", for: indexPath)
         cell.textLabel?.text = RecentSearches.searches[indexPath.row]
-        cell.accessoryType = UITableViewCellAccessoryType.detailDisclosureButton
         return cell
     }
     
@@ -40,7 +39,6 @@ class RecentSearchesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination.contentViewController

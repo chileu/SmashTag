@@ -24,6 +24,10 @@ class Mention: NSManagedObject {
             let matches = try context.fetch(request)
             if matches.count > 0 {
                 matches[0].count += 1
+                print("mention info keyword: \(mentionInfo.keyword)")
+                print("query: \(query)")
+                print("matches count incremented: \(matches[0].count)")
+                print("------")
                 return matches[0]
             }
             

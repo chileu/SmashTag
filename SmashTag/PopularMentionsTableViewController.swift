@@ -22,15 +22,12 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
     { didSet { updateUI() } }
     
     var fetchedResultsController: NSFetchedResultsController<Mention>?
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     private func updateUI() {
         if let context = container?.viewContext, mention != nil {
             let request: NSFetchRequest<Mention> = Mention.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false)]
+            request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false),
+                                       NSSortDescriptor(key: "keyword", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
             request.predicate = NSPredicate(format: "query = [cd] %@", mention!)
             fetchedResultsController = NSFetchedResultsController<Mention>(
                 fetchRequest: request,
@@ -44,9 +41,7 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Popular Mentions Cell", for: indexPath)
-        print("cell found")
         if let mention = fetchedResultsController?.object(at: indexPath) {
-            print("getting mention: \(mention.keyword)")
             cell.textLabel?.text = mention.keyword
             cell.detailTextLabel?.text = String(mention.count)
         }
