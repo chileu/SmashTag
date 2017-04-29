@@ -61,6 +61,10 @@ class SmashTweetTableViewController: TweetTableViewController {
                 if let mentionsCount = (try? context.fetch(Mention.fetchRequest()))?.count {
                     print("\(mentionsCount) mentions")
                 }
+                
+                if let lastMention = try? context.fetch(Mention.fetchRequest()).last {
+                    print("last Mention: \(lastMention?.keyword), \(lastMention?.query), \(lastMention?.count)")
+                }
             }
             
         }

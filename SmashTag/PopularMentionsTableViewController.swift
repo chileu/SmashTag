@@ -31,7 +31,7 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
         if let context = container?.viewContext, mention != nil {
             let request: NSFetchRequest<Mention> = Mention.fetchRequest()
             request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false)]
-            request.predicate = NSPredicate(format: "query = %@", mention!)
+            request.predicate = NSPredicate(format: "query = [cd] %@", mention!)
             fetchedResultsController = NSFetchedResultsController<Mention>(
                 fetchRequest: request,
                 managedObjectContext: context,

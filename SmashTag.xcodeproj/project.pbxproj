@@ -134,12 +134,12 @@
 				92A59C651EAEA2E100B633C8 /* UITableViewDataSource+NSFetchedResultsController.swift */,
 				92A59C631EAEA24600B633C8 /* FetchedResultsTableViewController.swift */,
 				92A59C611EAE9ACF00B633C8 /* SmashTweetersTableViewController.swift */,
+				92A59C691EB1518800B633C8 /* PopularMentionsTableViewController.swift */,
 				92A59C5F1EAE8E2A00B633C8 /* SmashTweetTableViewController.swift */,
 				9256A11D1EA6B3A8008DDD31 /* MentionsTableViewController.swift */,
 				9256A1231EA8EBA5008DDD31 /* ImageViewController.swift */,
 				92296E9B1EA5740B009F79F7 /* TweetTableViewController.swift */,
 				9256A1271EA95E35008DDD31 /* RecentSearchesTableViewController.swift */,
-				92A59C691EB1518800B633C8 /* PopularMentionsTableViewController.swift */,
 				926BA9951EAA589000502FC4 /* ImagesCollectionViewController.swift */,
 			);
 			name = Controller;

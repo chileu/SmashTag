@@ -33,7 +33,7 @@ class Tweet: NSManagedObject {
         tweet.text = twitterInfo.text
         tweet.created = twitterInfo.created as NSDate
         tweet.tweeter = try? TwitterUser.findOrCreateTwitterUser(matching: twitterInfo.user, in: context)
-        return addMentions(keyword: "", tweet: tweet, twitterInfo: twitterInfo, in: context)
+        return addMentions(keyword: keyword, tweet: tweet, twitterInfo: twitterInfo, in: context)
     }
     
     class func addMentions(keyword: String, tweet: Tweet, twitterInfo: Twitter.Tweet, in context: NSManagedObjectContext) -> Tweet {
