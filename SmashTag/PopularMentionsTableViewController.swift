@@ -11,6 +11,11 @@ import CoreData
 
 class PopularMentionsTableViewController: FetchedResultsTableViewController {
     
+    override func viewDidLoad() {
+        print("mention: \(mention)")
+        print("container: \(container)")
+    }
+    
     var mention: String? { didSet { updateUI() } } // 'mention' is the text from the row that was selected in Recent Search TVC
     
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer

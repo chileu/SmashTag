@@ -10,6 +10,12 @@ import UIKit
 import CoreData
 
 class SmashTweetersTableViewController: FetchedResultsTableViewController {
+    
+    override func viewDidLoad() {
+        print("mention: \(mention)")
+        print("container: \(container)")
+    }
+    
     var mention: String? { didSet { updateUI() } }
     
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
