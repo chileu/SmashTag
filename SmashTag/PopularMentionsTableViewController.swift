@@ -43,7 +43,7 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Popular Mentions Cell", for: indexPath)
         if let mention = fetchedResultsController?.object(at: indexPath) {
             cell.textLabel?.text = mention.keyword
-            cell.detailTextLabel?.text = String(mention.count)
+            cell.detailTextLabel?.text = "tweet count: " + String(mention.count)
         }
         return cell
     }

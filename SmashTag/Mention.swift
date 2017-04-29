@@ -14,11 +14,13 @@ class Mention: NSManagedObject {
     
     class func findOrCreateMentions(query: String, mentionInfo: Twitter.Mention, in context: NSManagedObjectContext) throws -> Mention {
         
-        //should find all mentions where the keyword of the mention matches the search text from the query
-        // is this right? or we need to find all mentions that are mentioned in this tweet?
+        // should we find all mentions where the keyword of the mention matches the search text from the query? - no
+        // find all mentions from tweets that were found with a particular search query
+        // e.g. searching for #federer might return tweets with #tennis. searching for #nadal might also return #tennis.
+        // but clicking on detail disclosure button for #federer only returns #tennis hashtags from #federer, not #nadal
         
         let request: NSFetchRequest<Mention> = Mention.fetchRequest()
-        request.predicate = NSPredicate(format: "keyword = %@ AND query = %@", mentionInfo.keyword, query)
+        request.predicate = NSPredicate(format: "keyword =[cd] %@ AND query = %@", mentionInfo.keyword, query)
         
         do {
             let matches = try context.fetch(request)

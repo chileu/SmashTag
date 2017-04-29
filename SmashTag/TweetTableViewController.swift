@@ -134,33 +134,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-//    private lazy var pendingRequestForOlderTweets = false
-    
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if let visibleIndexPaths = tableView.indexPathsForVisibleRows {
-//            //print("index paths for visible rows: \(visibleIndexPaths)")
-//            var totalNumberOfTweets = 0
-//            for indexPathPair in visibleIndexPaths {
-//                //print("max: \(max(indexPathPair[0], indexPathPair[1]))")
-//                let maxIndex = max(indexPathPair[0], indexPathPair[1])
-//                totalNumberOfTweets = tweets.flatMap {$0.count}.reduce(0, +)
-//                
-//                print("max index: \(maxIndex), totalNumberOfTweet: \(totalNumberOfTweets)")
-//                
-//                if let request = lastTwitterRequest { print("request: \(request)") }
-//                
-//                if maxIndex + 1 >= totalNumberOfTweets {
-//                    pendingRequestForOlderTweets = true
-//                    searchForTweets()
-//                    tableView.reloadData()
-//                    pendingRequestForOlderTweets = false
-//                }
-//            }
-//            
-//        }
-//        //print("total # of tweets: \(tweets.flatMap {$0.count}.reduce(0, +))")
-//    }
-    
     private var selectedTweet: Twitter.Tweet?
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
